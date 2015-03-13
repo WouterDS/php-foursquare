@@ -253,9 +253,11 @@ class FoursquareApi
      */
     private function ParseHeaders($ch, $header)
     {
-        if (strpos($header, ':') !== false) {
-            $header_split = explode(':', $header);
-            $this->ResponseHeaders[strtolower(trim($header_split[0]))] = trim($header_split[1]);
+        $delimiterPos = strpos($header, ':');
+        if ($delimiterPos !== false) {
+            $headerLeft = substr($header, 0, $delimiterPos++);
+            $headerRight = substr($header, $delimiterPos);
+            $this->ResponseHeaders[strtolower(trim($headerLeft))] = trim($headerRight);
         }
 
         return strlen($header);
