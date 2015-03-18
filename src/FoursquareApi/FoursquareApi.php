@@ -14,7 +14,6 @@ namespace FoursquareApi;
 
 // Set the default version
 // @TODO: Warning when the version becomes too out of date
-//define("DEFAULT_VERSION", "20140201");
 define("DEFAULT_VERSION", "20140806");
 
 // I have no explanation as to why this is necessary
