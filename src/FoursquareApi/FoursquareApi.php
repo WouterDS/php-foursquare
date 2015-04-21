@@ -347,7 +347,7 @@ class FoursquareApi
         } elseif (!isset($json->response)) {
             return null;
         } else {
-            return explode(' ', $json->response->GeoObjectCollection->featureMember[0]->GeoObject->Point);
+            return explode(' ', $json->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos);
         }
     }
 
