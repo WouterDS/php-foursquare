@@ -329,7 +329,7 @@ class FoursquareApi
      * Leverages the yandex maps api to generate a lat/lng pair for a given address
      * packaged with FoursquareApi to facilitate locality searches.
      *
-     * @param String $addr An address string accepted by the google maps api
+     * @param String $addr An address string accepted by the yandex maps api
      *
      * @return array(lat, lng) || NULL
      */
