@@ -323,6 +323,34 @@ class FoursquareApi
     }
 
     /**
+     * Yandex GeoCoder
+     * Leverages the google maps api to generate a lat/lng pair for a given address
+     * packaged with FoursquareApi to facilitate locality searches.
+     *
+     * @param String $addr An address string accepted by the google maps api
+     *
+     * @return array(lat, lng) || NULL
+     */
+    public function YandexGeoLocate($addr)
+    {
+        $geoapi = "http://geocode-maps.yandex.ru/1.x/";
+        $params = [
+            'format' => 'json',
+            'geocode' => $addr,
+        ];
+        $response = $this->GET($geoapi, $params);
+        $json = json_decode($response);
+        if (isset($json->error)) {
+            return null;
+        } else {
+            return [
+                $json->results[0]->geometry->location->lat,
+                $json->results[0]->geometry->location->lng
+            ];
+        }
+    }
+
+    /**
      * MakeUrl
      * Takes a base url and an array of parameters and sanitizes the data, then creates a complete
      * url with each parameter as a GET parameter in the URL
