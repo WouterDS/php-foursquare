@@ -314,6 +314,8 @@ class FoursquareApi
         $json = json_decode($response);
         if ($json->status === "ZERO_RESULTS") {
             return null;
+        } elseif (!isset($json->results[0])) {
+            return false;
         } else {
             return [
                 $json->results[0]->geometry->location->lat,
@@ -341,12 +343,11 @@ class FoursquareApi
         $response = $this->GET($geoapi, $params);
         $json = json_decode($response);
         if (isset($json->error)) {
+            return false;
+        } elseif (!isset($json->response)) {
             return null;
         } else {
-            return [
-                $json->results[0]->geometry->location->lat,
-                $json->results[0]->geometry->location->lng
-            ];
+            return explode(' ', $json->response->GeoObjectCollection->featureMember[0]->GeoObject->Point);
         }
     }
 
